@@ -1,0 +1,191 @@
+{% extends 'home/dash_base.html' %}
+{% load crispy_forms_tags %}
+{% block content %}
+
+    {% if completed_appointments %}
+
+        <style>
+            body {
+                margin: 0;
+                padding: 0;
+                font-family: raleway, helveticaneue, helvetica neue, Helvetica, Arial, sans-serif;
+                /*background-image: linear-gradient(125deg, #2c3e50, #27ae60, #2980b9, #8e44ad);*/
+                background-size: 400% 400%;
+                animation: bganimation 15s infinite;
+
+            }
+
+
+            table {
+                font-family: raleway, helveticaneue, helvetica neue, Helvetica, Arial, sans-serif;
+                color: blue;
+                width: 100%;
+                margin: auto;
+                border: 1px solid white;
+                border-collapse: collapse;
+                text-align: center;
+                table-layout: fixed;
+                backgroud: grey;
+                color: black;
+                margin-top: 100px;
+            }
+
+            td, th {
+                border: 1px solid #000000;
+                text-align: center;
+                padding: 8px;
+
+            }
+
+
+            @keyframes bganimation {
+                0% {
+                    background-position: 0% 50%;
+                }
+                50% {
+                    background-position: 100% 50%;
+                }
+                100% {
+                    background-position: 0% 50%;
+                }
+
+            }
+
+
+        </style>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+
+        <table>
+            <tr>
+                <td>Therapist Name</td>
+                <td>Appointment Time</td>
+                <td>Appointment Status</td>
+                <td>Rate</td>
+            </tr>
+
+            {% for appointments in completed_appointments %}
+                    <tr>
+                    <td>{{ appointments.therapist.pdetails.user.first_name }} {{ appointments.therapist.pdetails.user.last_name }}</td>
+                    <td>{{ appointments.appointmenttime }}</td>
+                    <td>Completed</td>
+
+                {% if ratings %}
+
+                    {% for rating in ratings %}
+
+                        {% if rating.appointment.id == appointments.id %}
+                            <td>Rated {{ rating.rating }} Stars</td>
+                            {% elif rating.appoint.id != appointments.id %}
+                            <td>
+{#                        <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet"#}
+{#                              id="bootstrap-css">#}
+                        <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+                        <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+                        <!------ Include the above in your HEAD tag ---------->
+
+                        <!DOCTYPE html>
+                        <html>
+                        <head>
+                            <!-- Font Awesome Icon Library -->
+{#                            <link rel="stylesheet"#}
+{#                                  href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">#}
+                            <style>
+                                .checked {
+                                    color: orange;
+                                }
+                            </style>
+                        </head>
+                        <body>
+
+
+
+
+                        <span class="fa fa-star" id="star1"
+                              onclick="add(this,1,{{ appointments.id }})"></span>
+                        <span class="fa fa-star" id="star2"
+                              onclick="add(this,2,{{ appointments.id }})"></span>
+                        <span class="fa fa-star" id="star3"
+                              onclick="add(this,3,{{ appointments.id }})"></span>
+                        <span class="fa fa-star" id="star4"
+                              onclick="add(this,4,{{ appointments.id }})"></span>
+                        <span class="fa fa-star" id="star5"
+                              onclick="add(this,5,{{ appointments.id }})"></span>
+
+                        {% if 2 < 3 %}
+
+                        {% endif %}
+
+                        <script>
+
+                            function add(ths, sno, a_id) {
+
+
+                                let ajax_url = '/rating/';
+                                let data_to_send = {
+                                    'msg': sno,
+                                    'a_id': a_id,
+
+
+                                };
+                                console.log(sno, 'added to database')
+
+                                $.post(ajax_url, data_to_send)
+                                    .then((data) => {
+
+                                        console.log(data, 'pass');
+                                        for (var i = 1; i <= 5; i++) {
+                                            var cur = document.getElementById("star" + i)
+                                            cur.className = "fa fa-star"
+                                        }
+
+                                        for (var i = 1; i <= sno; i++) {
+                                            var cur = document.getElementById("star" + i)
+                                            if (cur.className == "fa fa-star") {
+                                                cur.className = "fa fa-star checked"
+                                            }
+                                        }
+
+
+                                    })
+                                    .fail((err) => {
+                                        console.log('failed');
+                                    });
+
+
+
+                                console.log(sno, 'hello2')
+                            }
+                        </script>
+
+                        </body>
+                        </html>
+
+
+                    </td>
+                        {% endif %}
+
+                    {% endfor %}
+
+                {% endif %}
+
+                </tr>
+
+
+            {% endfor %}
+
+        </table>
+
+
+        {#        </form>#}
+
+    {% else %}
+
+        <p>You haven't completed any session yet</p>
+
+    {% endif %}
+
+{% endblock content %}
+
+
+

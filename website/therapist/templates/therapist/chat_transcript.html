@@ -1,0 +1,45 @@
+{% extends 'therapist/tdashbasic.html' %}
+{% load staticfiles %}
+
+
+{% block content %}
+
+    {% for chat in chats %}
+        {% if chat.sender_id == 4 or chat.reciever == 4%}
+            {% if 'event_requestæ' in chat.message %}
+                BOT: event request made<br>
+                {% else %}
+                BOT: {{ chat.message }}<br>
+                {% endif %}
+
+        {% else %}
+            {{ user_name }}: {{ chat.message }}<br>
+        {% endif %}
+
+
+    {% endfor %}
+
+<div class="pagination">
+    <span class="step-links">
+        {% if chats.has_previous %}
+            <a class="button margin-top-15" href="?{{ page_request_var }}=1">&laquo; first</a>
+            <a class="button margin-top-15" href="?{{ page_request_var }}={{ chats.previous_page_number }}">previous</a>
+        {% endif %}
+
+        <span class="current">
+           <strong>Page {{ chats.number }} of {{ chats.paginator.num_pages }}.</strong>
+        </span>
+
+        {% if chats.has_next %}
+            <a class="button margin-top-15" href="?{{ page_request_var }}={{ chats.next_page_number }}">next</a>
+            <a class="button margin-top-15" href="?{{ page_request_var }}={{ chats.paginator.num_pages }}">last &raquo;</a>
+        {% endif %}
+    </span>
+</div>
+
+    <div id="backtotop"><a href="#"></a></div>
+
+
+{% endblock content %}
+
+

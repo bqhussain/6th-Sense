@@ -1,0 +1,95 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Survey</title>
+     <link rel="stylesheet" href="{% static 'bookappoint/style.css' %}" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+<script>
+$(function() {
+$("button[type='submit']").click(function(){
+        var check = true;
+        $("input:radio").each(function(){
+            var name = $(this).attr("name");
+            if($("input:radio[name="+name+"]:checked").length == 0){
+                check = false;
+            }
+        });
+
+        if(check){
+            alert('Thank you for your valuable time');
+        }else{
+            alert('Please select at least one answer in each question.');
+            return false
+        }
+    });
+});
+</script>
+</head>
+{#<style>#}
+{#    table {#}
+{#        font-family: Calibri;#}
+{#        color: blue#}
+{#        width: 100%;#}
+{#    }#}
+{##}
+{#    td, th {#}
+{#        border: 1px solid #000000;#}
+{#        text-align: center;#}
+{#        padding: 8px;#}
+{#    }#}
+{##}
+{#    tr:nth-child(even) {#}
+{#        background-color: #ffffff;#}
+{#    }#}
+{#</style>#}
+<body>
+
+<form action = '{% url 'survey' %}' method='POST'>
+{% csrf_token %}
+    <table>
+        <tr>
+            <td>Q#</td>
+            <td>Question</td>
+            <td>Almost Never</td>
+            <td>Sometimes</td>
+            <td>Often</td>
+            <td>All the time</td>
+        </tr>
+
+        {% for question in questions %}
+            <tr>
+                <td>{{ question.id }}</td>
+                <td>{{ question.question }}</td>
+            {% for iter in iterator %}
+
+                <td>
+
+{#                    <select name="bilal">#}
+
+{#                        {% for score in score %}#}
+                        <input type="radio" name="bilal{{ question.id }}" value="{{question.id}}:{{ iter }}">
+{#                        <option value="{{question}}:{{ score }}">{{ score }}</option>#}
+{#                   {% endfor %}#}
+
+
+
+{#                    </select>#}
+                </td>
+                {% endfor %}
+            </tr>
+
+
+
+        {% endfor %}
+
+    </table>
+{#    <button type="submit"  value="SUBMIT"/>#}
+    <button type="submit" style="height:50;width:100">SUBMIT</button>
+</form>
+
+
+</body>
+</html>

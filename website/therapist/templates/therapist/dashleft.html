@@ -1,0 +1,45 @@
+{% load staticfiles %}
+        <div class="dashboard-nav">
+            <div class="dashboard-nav-inner">
+
+                <ul data-submenu-title="Main">
+                    {% if appointments %}
+                    <li class="active"><a href="{% url 'tdashboard' %}"><i class="sl sl-icon-settings"></i>
+                        Dashboard<span class="nav-tag green">{{ approved }}</span></a></li>
+                {% else %}
+                    <li class="active"><a href="{% url 'tdashboard' %}"><i class="sl sl-icon-settings"></i> Dashboard</a>
+                    </li>
+                {% endif %}
+{#                    <li class="active"><a href="{% url 'tdashboard' %}"><i class="sl sl-icon-settings"></i> Dashboard</a></li>#}
+                    <li><a href="{% url 'chatbox' %}"><i class="sl sl-icon-envelope-open"></i> Chat </a></li>
+{#                    <li><a href="{% url 'chatbox' %}"><i class="sl sl-icon-envelope-open"></i> Messages <span#}
+{#                            class="nav-tag messages"></span></a></li>#}
+
+                </ul>
+
+                <ul data-submenu-title="Tasks">
+                    <li><a><i class="sl sl-icon-layers"></i> My Meetings</a>
+                        <ul>
+                            <li><a href="{% url 'active' %}">Active <span class="nav-tag green">{{ approved }}</span></a>
+                            </li>
+                            <li><a href="{% url 'pending' %}">Pending <span class="nav-tag yellow">{{ pending }}</span></a>
+                            </li>
+                            <li><a href="{% url 'p_completed' %}">Completed <span class="nav-tag blue">{{ completed }}</span></a>
+                        </li>
+                        <li><a href="{% url 'p_declined' %}">Expired <span class="nav-tag red">{{ rejected }}</span></a>
+                        </li>
+{#                            <li><a href="dashboard-my-listings.html">Expired <span class="nav-tag red">{{ rejected }}</span></a></li>#}
+                        </ul>
+                    </li>
+{#                    <li><a href="dashboard-reviews.html"><i class="sl sl-icon-star"></i> Reminders</a></li>#}
+                    <li><a href="{% url 'patients' %}"><i class="sl sl-icon-heart"></i>Patients</a></li>
+
+                </ul>
+
+                <ul data-submenu-title="Account">
+                    <li><a href="{% url 'therapist_profile' %}"><i class="sl sl-icon-user"></i> My Profile</a></li>
+                    <li><a href="{% url 'logout' %}"><i class="sl sl-icon-power"></i> Logout</a></li>
+                </ul>
+
+            </div>
+        </div>

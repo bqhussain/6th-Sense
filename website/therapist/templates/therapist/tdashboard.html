@@ -1,0 +1,163 @@
+{% extends 'therapist/tdashbasic.html' %}
+{% load staticfiles %}
+
+
+{% block content %}
+    <div id="titlebar">
+        <div class="row">
+            <div class="col-md-12">
+                <h2>Welcome Dr.{{ request.user.first_name }}</h2>
+                <!-- Breadcrumbs -->
+                {#                        <nav id="breadcrumbs">#}
+                {#                            <ul>#}
+                {#                                <li><a href="{% url 'tdashboard' %}">Home</a></li>#}
+                {#                                <li>Dashboard</li>#}
+                {#                            </ul>#}
+                {#                        </nav>#}
+            </div>
+        </div>
+    </div>
+
+    {% if appointments %}
+        {#        {% for appointment in appointments %}#}
+
+
+        {% for appointment in appointments %}
+
+
+
+            {% if appointment.approved == "2" %}
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="notification success closeable margin-bottom-30">
+                            <p>Your Booking with
+                                <strong>{{ appointment.user.first_name }}</strong> has been
+                                confirmed.
+                                Your Appointment is at {{ appointment.appointmenttime }}
+                                till {{ appointment.valid_till }}
+                            </p>
+                            <a class="close" href="#"></a>
+                        </div>
+                    </div>
+                </div>
+            {% elif appointment.approved == "1" %}
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="notification success closeable margin-bottom-30">
+                            <p>Your Booking with
+                                <strong>{{ appointment.user.first_name }}</strong> is on Pending.
+                            </p>
+                            <a class="close" href="#"></a>
+                        </div>
+                    </div>
+                </div>
+
+            {% elif appointment.approved == "0" %}
+
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="notification success closeable margin-bottom-30">
+                            <p>Your declined appointment with
+                                <strong>{{ appointment.user.first_name }}</strong>
+                            </p>
+                            <a class="close" href="#"></a>
+                        </div>
+                    </div>
+                </div>
+
+            {% endif %}
+        {% endfor %}
+
+        {#        {% endfor %}#}
+
+    {% endif %}
+
+
+    <div class="row">
+
+        <!-- Recent Activity -->
+        <div class="col-lg-6 col-md-12">
+            <div class="dashboard-list-box with-icons margin-top-20">
+                <h4>Recent Activities</h4>
+                {% if appointments %}
+                    <ul>
+                        <li>
+                            <i class="list-box-icon sl sl-icon-layers"></i> <strong>You have appointment
+                            Requests</strong>
+{#                            <a href="#" class="close-list-item"><i class="fa fa-close"></i></a>#}
+                        </li>
+
+                        {% for appointment in appointments %}
+
+                            {% if appointment.approved == "2" %}
+                                <li>
+                                    <i class="list-box-icon sl sl-icon-star"></i>
+                                    <p>You have a session with
+                                        <strong>{{ appointment.user.first_name }}</strong>
+                                        at {{ appointment.appointmenttime }}
+                                        till {{ appointment.valid_till }}
+                                    </p>
+{#                                    <a href="#" class="close-list-item"><i class="fa fa-close"></i></a>#}
+                                </li>
+                            {% endif %}
+
+
+
+
+                        {% endfor %}
+
+                        <!--Add more here if needed-->
+                    </ul>
+                {% endif %}
+            </div>
+        </div>
+
+        <!-- Invoices -->
+
+        <div class="col-lg-6 col-md-12">
+            <div class="dashboard-list-box invoices with-icons margin-top-20">
+                <h4>Payments</h4>
+                <ul>
+                {% for transaction in transactions %}
+                    {% for appointment in appointments %}
+
+
+                            {% if transaction.appointment_id == appointment.id %}
+                                <li><i class="list-box-icon sl sl-icon-doc"></i>
+                                    <strong>Session
+                                        with {{ appointment.user.first_name }} {{ appointment.user.last_name }}</strong>
+{#                                    <ul>#}
+                                        {% if appointment.payed == 1 %}
+                                            <li class="paid">Paid</li>
+{#                                            <li>Order ID: {{ transaction.id }}</li>#}
+{#                                            <li>Appointment ID: {{ appointment.id }}</li>#}
+                                            <li>Date: {{ transaction.timestamp }}</li>
+
+                                        {% else %}
+                                            <li class="unpaid">Unpaid</li>
+
+                                        {% endif %}
+{#                                    </ul>#}
+                                    {#                    <div class="buttons-to-right">#}
+                                    {#                        <a href="dashboard-invoice.html" class="button gray">View Invoice</a>#}
+                                    {#                    </div>#}
+                                </li>
+{#                                {% else %}#}
+{#                                    <li class="unpaid">{{ appointment.user.first_name }} {{ appointment.user.last_name }} Payment Status: Unpaid</li>#}
+
+                            {% endif %}
+
+
+                        {% endfor %}
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+
+
+        <div class="col-md-12">
+            <div class="copyrights">© 2019 6th Sense. All Rights Reserved.</div>
+        </div>
+
+
+{% endblock content %}

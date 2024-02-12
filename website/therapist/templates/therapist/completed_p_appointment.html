@@ -1,0 +1,166 @@
+{% extends 'therapist/tdashbasic.html' %}
+{% load staticfiles %}
+
+
+{% block content %}
+
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css">
+
+
+    <link rel="stylesheet" href="{% static 'patients_registered/style.css' %}">
+
+
+
+
+    <ul class="responsive-table">
+        <li class="table-header">
+{#            <div class="col col-1">Patient Id</div>#}
+            <div class="col col-2">Patient Name</div>
+{#            <div class="col col-3">Appointment Id</div>#}
+            <div class="col col-4">Appointment Time</div>
+            <div class="col col-5">Appointment Status</div>
+            <div class="col col-6">Session Rating</div>
+
+        </li>
+
+         {% for appointments in completed_appointments %}
+                <li class="table-row">
+{#                    <div class="col col-1" data-label="Patient Id">{{ appointments.user.id }}</div>#}
+                    <div class="col col-2" data-label="Patient Name">{{ appointments.user.first_name }} {{ appointments.user.last_name }}</div>
+{#                    <div class="col col-3" data-label="Appointment Id">{{ appointments.id }}</div>#}
+                    <div class="col col-4" data-label="Appointment Time">{{ appointments.appointmenttime }}</div>
+                    <div class="col col-5" data-label="Appointment Status">Completed</div>
+                {% if ratings %}
+
+                    {% for rating in ratings %}
+
+                        {% if rating.appointment.id == appointments.id %}
+                            <div class="col col-6" data-label="Session Rating">Rated {{ rating.rating }} Stars</div>
+                            {% elif rating.appoint.id != appointments.id %}
+                           <div class="col col-6" data-label="Session Rating">Not Rated Yet</div>
+                        {% endif %}
+
+                    {% endfor %}
+
+                {% endif %}
+
+                </li>
+
+
+            {% endfor %}
+
+
+
+
+
+    </ul>
+
+
+
+
+
+
+
+
+{#    #}
+{##}
+{#    {% if completed_appointments %}#}
+{##}
+{#        <style>#}
+{#            body {#}
+{#                margin: 0;#}
+{#                padding: 0;#}
+{#                font-family: raleway, helveticaneue, helvetica neue, Helvetica, Arial, sans-serif;#}
+{#                /*background-image: linear-gradient(125deg, #2c3e50, #27ae60, #2980b9, #8e44ad);*/#}
+{#                background-size: 400% 400%;#}
+{#                animation: bganimation 15s infinite;#}
+{##}
+{#            }#}
+{##}
+{##}
+{#            table {#}
+{#                font-family: raleway, helveticaneue, helvetica neue, Helvetica, Arial, sans-serif;#}
+{#                color: blue;#}
+{#                width: 100%;#}
+{#                margin: auto;#}
+{#                border: 1px solid white;#}
+{#                border-collapse: collapse;#}
+{#                text-align: center;#}
+{#                table-layout: fixed;#}
+{#                backgroud: grey;#}
+{#                color: black;#}
+{#                margin-top: 100px;#}
+{#            }#}
+{##}
+{#            td, th {#}
+{#                border: 1px solid #000000;#}
+{#                text-align: center;#}
+{#                padding: 8px;#}
+{##}
+{#            }#}
+{##}
+{##}
+{#            @keyframes bganimation {#}
+{#                0% {#}
+{#                    background-position: 0% 50%;#}
+{#                }#}
+{#                50% {#}
+{#                    background-position: 100% 50%;#}
+{#                }#}
+{#                100% {#}
+{#                    background-position: 0% 50%;#}
+{#                }#}
+{##}
+{#            }#}
+{##}
+{##}
+{#        </style>#}
+{#        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>#}
+{##}
+{##}
+{#        <table>#}
+{#            <tr>#}
+{#                <td>Patient Id</td>#}
+{#                <td>Patient Name</td>#}
+{#                <td>Appointment Id</td>#}
+{#                <td>Appointment Time</td>#}
+{#                <td>Appointment Status</td>#}
+{#                <td>Session Rating</td>#}
+{#            </tr>#}
+{##}
+{#            {% for appointments in completed_appointments %}#}
+{#                <tr>#}
+{#                <td>{{ appointments.user.id }}</td>#}
+{#                <td>{{ appointments.user.first_name }} {{ appointments.user.last_name }}</td>#}
+{#                <td>{{ appointments.id }}</td>#}
+{#                <td>{{ appointments.appointmenttime }}</td>#}
+{#                <td>Completed</td>#}
+{##}
+{#                {% if ratings %}#}
+{##}
+{#                    {% for rating in ratings %}#}
+{##}
+{#                        {% if rating.appointment.id == appointments.id %}#}
+{#                            <td>Rated {{ rating.rating }} Stars</td>#}
+{#                            {% elif rating.appoint.id != appointments.id %}#}
+{#                            <td>#}
+{#                                Not Rated Yet.#}
+{#                    </td>#}
+{#                        {% endif %}#}
+{##}
+{#                    {% endfor %}#}
+{##}
+{#                {% endif %}#}
+{##}
+{##}
+{##}
+{#            {% endfor %}#}
+{##}
+{##}
+{#        </table>#}
+{#    {% endif %}#}
+
+{% endblock content %}
+
+

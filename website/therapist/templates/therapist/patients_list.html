@@ -1,0 +1,54 @@
+{% extends 'therapist/tdashbasic.html' %}
+{% load staticfiles %}
+
+
+{% block content %}
+
+
+
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css">
+
+
+    <link rel="stylesheet" href="{% static 'patients_registered/style.css' %}">
+
+
+
+
+    <ul class="responsive-table">
+        <li class="table-header">
+{#            <div class="col col-1">Patient Id</div>#}
+            <div class="col col-2">Patient Name</div>
+{#            <div class="col col-3">Appointment Date</div>#}
+{#            <div class="col col-4">Payment Status</div>#}
+            <div class="col col-6">View Profile</div>
+        </li>
+
+        {% if patients_list %}
+            {% for patients in patients_list %}
+                <li class="table-row">
+{#                    <div class="col col-1" data-label="Patient Id">{{ patients.id }}</div>#}
+                    <div class="col col-2" data-label="Patient Name">{{ patients.first_name }} {{ patients.last_name }}</div>
+{#                    <div class="col col-3" data-label="Amount">{{  }}</div>#}
+{#                    <div class="col col-4" data-label="Payment Status">Pending</div>#}
+                    <div class="col col-6" data-label="Profile"><a href="{% url 'patient_profile' patients.id %}" >Click Here</a></div>
+
+                </li>
+
+
+            {% endfor %}
+
+
+        {% endif %}
+
+
+    </ul>
+
+
+
+
+
+
+{% endblock content %}
+
+
