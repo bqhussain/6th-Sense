@@ -131,8 +131,8 @@ USE_TZ = False
 
 if DEBUG:
 
-    STRIPE_PUBLISHABLE_KEY = 'pk_test_wM20CX424AaiJgdrjO6x3NN500Wtkr7tv8'
-    STRIPE_SECRET_KEY = 'sk_test_3YWsTlaEAM4sUDN0SBEhM5py00mNeyB1zB'
+    STRIPE_PUBLISHABLE_KEY = 'enterkeyhere'
+    STRIPE_SECRET_KEY = 'enterkeyhere'
 else:
     STRIPE_PUBLISHABLE_KEY = ''
     STRIPE_SECRET_KEY = ''
@@ -161,7 +161,7 @@ EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 EMAIL_HOST_USER = 'sixthsensefyp@gmail.com'
-EMAIL_HOST_PASSWORD = 'Goku420!!'
+EMAIL_HOST_PASSWORD = 'password'
 
 
 
