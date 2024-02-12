@@ -1,0 +1,45 @@
+{% load staticfiles %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>6th Sense</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link rel="stylesheet" href="{% static 'home/css/style.css' %}">
+    <link rel="stylesheet" href="{% static 'home/css/colors/main.css' %}" id="colors">
+{#    <link rel="stylesheet" href="{% static 'bootstrap/css/bootstrap.min.css' %}" type="text/css">#}
+
+
+</head>
+
+<body>
+
+{#navigation bar added here#}
+{#{% include 'home/navigation_bar.html' %}#}
+<!-- Header / End -->
+
+{% if messages %}
+    {% for message in messages %}
+        <div class="alert alert-{{ message.tags }}">
+            {{ message }}
+        </div>
+    {% endfor %}
+{% endif %}
+
+
+{% block content %} {% endblock %}
+
+
+{#Footer added here#}
+{% include 'home/Footer.html' %}
+<!-- Footer / End -->
+
+
+<!-- Scripts
+        ================================================== -->
+{% include 'home/scripts.html' %}
+
+
+</body>
+</html>

@@ -1,0 +1,40 @@
+{% extends 'therapist/tdashbasic.html' %}
+{% load staticfiles %}
+
+
+{% block content %}
+
+
+
+        <div class="row">
+
+            <!-- Recent Activity -->
+            <div class="col-lg-6 col-md-12">
+                <div class="dashboard-list-box with-icons margin-top-20">
+                    <h4>Active Appointments</h4>
+                    <ul>
+                        {% for active in activeappointments %}
+                        <li>
+                            <i class="list-box-icon sl sl-icon-layers"></i> Your Session with <strong><a href="#">{{ active.user.first_name }}</a></strong>
+                            has been confirmed for {{ active.appointmenttime }}
+                            <a href="#" class="close-list-item"><i class="fa fa-close"></i></a>
+                        </li>
+
+{#                        <li>#}
+{#                            <i class="list-box-icon sl sl-icon-star"></i>Session with Shayaan Finished on 9/2/2019#}
+{#                </div>#}
+{#                <strong><a href="#"></a></strong>#}
+{#                <a href="#" class="close-list-item"><i class="fa fa-close"></i></a>#}
+{#                </li>#}
+
+{% endfor %}
+                <!--Add more here if needed-->
+                </ul>
+            </div>
+        </div>
+
+        </div>
+
+{% endblock content %}
+
+

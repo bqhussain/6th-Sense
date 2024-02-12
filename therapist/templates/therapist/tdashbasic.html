@@ -1,0 +1,59 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<head>
+
+
+    <title>6th Sense</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+    <link rel="stylesheet" href="{% static 'home/css/style.css' %}">
+    <link rel="stylesheet" href="{% static 'home/css/colors/main.css' %}" id="colors">
+
+</head>
+
+<body>
+{% if messages %}
+    {% for message in messages %}
+        <div class="alert alert-{{ message.tags }}">
+            {{ message }}
+        </div>
+    {% endfor %}
+{% endif %}
+
+<div id="wrapper">
+
+   {% include 'therapist/dashboardnav.html' %}
+    <div class="clearfix"></div>
+
+
+    <div id="dashboard">
+
+        <a href="#" class="dashboard-responsive-nav-trigger"><i class="fa fa-reorder"></i> Dashboard Navigation</a>
+
+{% include 'therapist/dashleft.html' %}
+        <!-- Navigation / End -->
+ <div class="dashboard-content">
+
+            <!-- Titlebar -->
+
+        {% block content %} {% endblock %}
+
+
+
+
+
+   </div>
+
+
+</div>
+
+</div>
+
+{% include 'home/scripts.html' %}
+
+
+
+
+</body>
+</html>
