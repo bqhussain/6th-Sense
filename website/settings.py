@@ -89,7 +89,7 @@ DATABASES = {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'sixthsense',
         'USER': 'root',
-        'PASSWORD': 'Goku420!!',
+        'PASSWORD': 'password',
 
     }
 }
